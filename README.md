@@ -6,6 +6,8 @@ This repository contains a SystemVerilog RTL implementation of an ultra‑miniat
 
 The system captures digitized neural signals from an external ADC, timestamps each sample at acquisition time, safely transfers data across clock domains using Gray‑coded asynchronous FIFOs, and outputs structured data packets for logging or further processing.
 
+
+
 Design Goals & Constraints:
 
 Ultra‑low power consumption (implantable medical device)
@@ -18,17 +20,29 @@ Scalable & parameterized architecture
 
 Clean analog–digital boundary suitable for mixed‑signal ASICs
 
+
+
 System Architecture:
 
 Analog Front End → ADC (adc_clk)
+
 ↓
+
 Timestamping & Channel Tagging
+
 ↓
+
 Gray‑Coded Asynchronous FIFO (CDC)
+
 ↓
+
 System Clock Domain (sys_clk)
+
 ↓
+
 Data Output / Logger
+
+
 
 Key Architectural Features:
 
@@ -43,6 +57,8 @@ Binary‑to‑Gray pointer conversion
 2‑Flip‑Flop synchronizers
 
 Parameterized FIFO depth and data widths
+
+
 
 Functional Blocks:
 
@@ -80,11 +96,15 @@ Outputs structured packets:
 
 { Channel ID | Timestamp | Neural Sample }
 
+
+
 Simulation files:
 
 neural_implant_parkinson_rtl.sv # Top‑level RTL + async FIFO
 
 tb_neural_implant_parkinson.sv # Self‑checking testbench
+
+
 
 Simulation Tools:
 
@@ -96,7 +116,9 @@ Synopsys VCS
 
 Xcelium
 
-CDC & Reliability Considerations
+
+
+CDC & Reliability Considerations:
 
 1. Gray‑coded pointers minimize bit toggling across domains
    
@@ -105,8 +127,9 @@ CDC & Reliability Considerations
 3. No multi‑bit data directly crosses clock domains
    
 4. FIFO depth parameterized for throughput vs power trade‑offs
+   
 
-Future Enhancements
+Future Enhancements:
 
 i. Power gating / clock gating hooks
 
